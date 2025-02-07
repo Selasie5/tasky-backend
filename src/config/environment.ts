@@ -4,7 +4,7 @@ dotenv.config();
 
 
 interface EnvironmentVariables{
-    MONGODB_URI:string,
+MONGODB_URI:string,
 RABBITMQ_URL:string,
 PORT:string,
 NODE_ENV: "development" | "production" | "test"
@@ -14,7 +14,7 @@ NODE_ENV: "development" | "production" | "test"
 //validate and extract environment variables
 const getEnvVariable = (key: keyof EnvironmentVariables):string=>
 {
-    const value = process.env[key as string];
+    const value = process.env[key];
     if(!value)
     {
         throw new Error(`Missing environment variable: ${key}`)
