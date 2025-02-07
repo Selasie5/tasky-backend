@@ -5,9 +5,11 @@ dotenv.config();
 
 interface EnvironmentVariables{
 MONGODB_URI:string,
+JWT__SECRET:string
 RABBITMQ_URL:string,
 PORT:string,
 NODE_ENV: "development" | "production" | "test"
+SENTRY_DSN:string
 }
 
 
@@ -24,7 +26,9 @@ const getEnvVariable = (key: keyof EnvironmentVariables):string=>
 
 export const env: EnvironmentVariables = {
     MONGODB_URI: getEnvVariable("MONGODB_URI"),
+    JWT__SECRET: getEnvVariable("JWT__SECRET"),
     RABBITMQ_URL: getEnvVariable("RABBITMQ_URL"),
     PORT: getEnvVariable("PORT"),
-    NODE_ENV: getEnvVariable("NODE_ENV") as "development" | "production" | "test"
+    NODE_ENV: getEnvVariable("NODE_ENV") as "development" | "production" | "test",
+    SENTRY_DSN: getEnvVariable("SENTRY_DSN"),
 }
