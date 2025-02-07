@@ -12,7 +12,12 @@ app.use(express.json());
 
 app.use(cors());
 
+app.get("/debug-sentry",  function mainHandler(req, res){
+    res.send ("My first Sentry error")
+   } );
+
 Sentry.setupExpressErrorHandler(app);
+
 
 //Start server
 const startServer = async ()=>

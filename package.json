@@ -4,7 +4,10 @@
   "main": "index.js",
   "scripts": {
     "start": "tsx watch app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org selasie --project tasky ./dist && sentry-cli sourcemaps upload --org selasie --project tasky ./dist",
+    "build:prod": "npm run build && npm run sentry:sourcemaps"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +18,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.3",
+    "@sentry/cli": "^2.41.1",
     "@sentry/node": "^9.0.1",
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
