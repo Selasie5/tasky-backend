@@ -4,7 +4,7 @@ import {logger} from "../utils/logger"
 export const taskService ={
 
     //Create a task
-    createTask: async(input: {title:string, description:string, status:string})=>
+    createTask: async(input: {title:string, description:string, status:string,deadline:string})=>
     {
         try {
             const task = new Task (input);
