@@ -12,10 +12,14 @@ interface ITask extends Document {
 const TaskSchema = new mongoose.Schema({
     title:{type:String, required:true},
     description: {type:String, required:true},
-    status: {type:String, required: true}
+    status: {
+        type:String,
+        enum:["OPEN", "IN_PROGRESS", "COMPLETED"],
+        default: "OPEN",
+        required: true}
 },
 {
     timestamps:true
 })
 
-export const TaskModel =  mongoose.model<ITask>("Task", TaskSchema)
+export const Task =  mongoose.model<ITask>("Task", TaskSchema)
