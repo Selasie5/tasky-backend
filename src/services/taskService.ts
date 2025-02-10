@@ -1,4 +1,5 @@
 import { Task } from "../models/Task"
+import { sendTaskToQueue } from "../queues/taskQueue";
 import {logger} from "../utils/logger"
 export const taskService ={
 
@@ -10,7 +11,7 @@ export const taskService ={
             await task.save();
     
             //Sending task to message queue
-
+              await sendTaskToQueue(task);
 
             return task;
         } catch (error:any) {
