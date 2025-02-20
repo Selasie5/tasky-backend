@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@apollo/server": "^4.11.3",
+    "@graphql-tools/merge": "^9.0.20",
     "@sentry/cli": "^2.41.1",
     "@sentry/node": "^9.0.1",
     "@types/bcrypt": "^5.0.2",

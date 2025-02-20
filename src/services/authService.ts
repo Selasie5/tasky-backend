@@ -5,7 +5,7 @@ import { logger } from "../utils/logger";
 
 export const authService = {
     //Register a new user:
-    register : async(email:string, password:string)=>
+    register : async(name:string,email:string, password:string)=>
     {
         try {
             const user = await User.find({email});
@@ -15,7 +15,7 @@ export const authService = {
             }
     
             const hashedPassword = await passwordUtils.hashPassword(password);
-            const newUser = new User({email,hashedPassword});
+            const newUser = new User({name,email,hashedPassword});
             await newUser.save();
     
             //Generate JWT token
