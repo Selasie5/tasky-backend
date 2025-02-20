@@ -9,6 +9,7 @@ import { connectDB } from '../config/database';
 import { env } from '../config/environment';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { logger } from '../utils/logger';
+import { MyContext } from '../../context'; // Import the custom context type
 
 // Initialize Express app
 const app = express();
@@ -18,7 +19,7 @@ app.use(express.json());
 app.use(authMiddleware);
 
 // Apollo Server setup
-const server = new ApolloServer({
+const server = new ApolloServer<MyContext>({
   typeDefs,
   resolvers,
 });
