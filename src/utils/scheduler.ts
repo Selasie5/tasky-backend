@@ -1,7 +1,8 @@
 import cron from "node-cron";
 import { Task } from "../models/Task";
+import { User } from "../models/User";
 import { logger } from "./logger";
-import { taskService } from "../services/taskService";
+import { sendEmail } from "./email";
 
 
 //Schedule a cron job to check for due tasks every minute
@@ -13,6 +14,11 @@ cron.schedule('* * * * *', async()=>
 
         for (const task of dueTasks){
             //Send email to user
+            await sendEmail({
+                to:"",
+                subject: "Task Deadline Reached",
+                text: `The task "${task.title}" is due.Please complete it as soon as possible`
+            })
 
             task.status = "overdue";
             await task.save();
@@ -38,6 +44,12 @@ export const scheduleDeadlineTask =(task:any)=>
         {
             try {
                 //Send email to the user
+                await sendEmail({
+                    to:"",
+                    subject: "Task Deadline Reached",
+                    text: `The task "${task.title}" is due.Please complete it as soon as possible`
+                })
+    
 
                 //Updating task status
                 task.status = 'overdue';

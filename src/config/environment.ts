@@ -10,6 +10,8 @@ RABBITMQ_URL:string,
 PORT:string,
 NODE_ENV: "development" | "production" | "test"
 SENTRY_DSN:string
+EMAIL_USER:string
+EMAIL_PASSWORD:string
 }
 
 
@@ -31,4 +33,6 @@ export const env: EnvironmentVariables = {
     PORT: getEnvVariable("PORT"),
     NODE_ENV: getEnvVariable("NODE_ENV") as "development" | "production" | "test",
     SENTRY_DSN: getEnvVariable("SENTRY_DSN"),
+    EMAIL_USER: getEnvVariable("EMAIL_USER"),
+    EMAIL_PASSWORD:getEnvVariable("EMAIL_PASSWORD")
 }
