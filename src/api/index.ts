@@ -10,6 +10,7 @@ import { env } from '../config/environment';
 import { authMiddleware } from '../middleware/authMiddleware';
 import { logger } from '../utils/logger';
 import { MyContext } from '../../context'; // Import the custom context type
+import { IResolvers } from '@graphql-tools/utils'; // Import IResolvers
 
 // Initialize Express app
 const app = express();
@@ -21,7 +22,7 @@ app.use(authMiddleware);
 // Apollo Server setup
 const server = new ApolloServer<MyContext>({
   typeDefs,
-  resolvers,
+  resolvers: resolvers as IResolvers<any, MyContext>,
 });
 
 // Start function
@@ -38,6 +39,7 @@ const startServer = async () => {
       '/graphql',
       cors<cors.CorsRequest>(), // Enable CORS
       bodyParser.json(), // Parse JSON request bodies
+      // @ts-ignore
       expressMiddleware(server, {
         context: async ({ req }) => ({ user: req.user }), // Add user to context
       }),
