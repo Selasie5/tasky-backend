@@ -1,6 +1,6 @@
 // src/context.ts
-import { User } from './models/User';
+import { User } from "./src/models/User";
 
 export interface MyContext {
-  user?: User; // The authenticated user (optional)
+  user?: typeof User; // The authenticated user (optional)
 }
