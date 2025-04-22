@@ -5,7 +5,7 @@ user: User!
 }
 
 type Mutation{
-login(email:String!, pasword:String!):AuthPayload
+login(email:String!, password:String!):AuthPayload
 register(name:String!, email:String!, password:String!):AuthPayload
 }
 `;

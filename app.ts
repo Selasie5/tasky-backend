@@ -22,7 +22,7 @@ const app = express();
 
 // Apply middleware
 app.use(express.json());
-app.use(authMiddleware);
+// app.use(authMiddleware);
 
 app.get("/debug-sentry",  function mainHandler(req, res){
   res.send ("My first Sentry error")

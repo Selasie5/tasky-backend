@@ -14,6 +14,7 @@ export const taskResolver = {
     Mutation:{
         createTask: async(_:any,{input}:{input:any})=>
         {
+          input.deadline = new Date(input.deadline);
             return await taskService.createTask(input);
                 },
         updateTask: async(_:any,{id,input}:{id:string,input:any})=>
