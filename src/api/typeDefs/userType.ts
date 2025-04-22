@@ -7,7 +7,7 @@ export const userType = `
     updatedAt: String!
   }
 
-  extend type Query {
+   type Query {
     me: User
   }
 `;

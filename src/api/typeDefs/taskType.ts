@@ -16,16 +16,16 @@ status:String!,
 deadline:String!
 }
 
-extend type Query
+ type Query
 {
 tasks: [Task!]!
 task(id:ID!):Task
 }
 
-extend type Mutation
+ type Mutation
 {
 createTask(input:TaskInput!):Task!
-updatedTask(id:ID!, input:TaskInput!):Task!
+updateTask(id:ID!, input:TaskInput!):Task!
 deleteTask(id:ID!):Boolean!
 }
 `
