@@ -6,16 +6,16 @@ import { sendEmail } from "./email";
 
 
 //Schedule a cron job to check for due tasks every minute
-cron.schedule('* * * * *', async()=>
+cron.schedule('*/10 * * * *', async()=>
 {
     try {
         const now = new Date();
         const dueTasks = await Task.find({deadline: {$lte:now}, status:{$ne:'completed'}});
-
+        const userEmail = await User.find({email:{$ne:null}});
         for (const task of dueTasks){
             //Send email to user
             await sendEmail({
-                to:"",
+                to: userEmail as unknown as string,
                 subject: "Task Deadline Reached",
                 text: `The task "${task.title}" is due.Please complete it as soon as possible`
             })
@@ -35,6 +35,7 @@ export const scheduleDeadlineTask =(task:any)=>
 {
     const deadline=  new Date(task.deadline);
     const now = new Date();
+  
 
     //The delay is being calculated in milliseconds
     const delay = deadline.getTime() - now.getTime();
@@ -43,9 +44,10 @@ export const scheduleDeadlineTask =(task:any)=>
         setTimeout(async()=>
         {
             try {
+              const userEmail = await User.find({email:{$ne:null}});
                 //Send email to the user
                 await sendEmail({
-                    to:"",
+                    to:userEmail as unknown as string,
                     subject: "Task Deadline Reached",
                     text: `The task "${task.title}" is due.Please complete it as soon as possible`
                 })

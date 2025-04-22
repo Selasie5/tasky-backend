@@ -6,7 +6,8 @@ export const sendNotificationToQueue =async (notification:any)=>
     const QUEUE = "notification_queue";
 
     try {
-        const connection  = await amqp.connect("anqp://localhost")
+        const connection  = await amqp.connect("amqp://localhost:5672");
+        
         const channel = await connection.createChannel();
         await channel.assertQueue(QUEUE, {durable:true});
         await channel.sendToQueue(QUEUE, Buffer.from(JSON.stringify(notification)), {persistent:true});

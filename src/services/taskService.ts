@@ -11,10 +11,16 @@ export const taskService ={
             await task.save();
     
             //Sending task to message queue
+            try {
               await sendTaskToQueue(task);
+            } catch (error) {
+              console.log(error)
+            }
+             
 
             return task;
         } catch (error:any) {
+          console.log(error)
             logger.error(error.message);
             throw new Error("Error creating task");
         }

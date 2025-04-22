@@ -15,7 +15,7 @@ import { authMiddleware } from './src/middleware/authMiddleware';
 import { logger } from './src/utils/logger';
 import { MyContext } from './context'; // Import the custom context type
 import { IResolvers } from '@graphql-tools/utils'; // Import IResolvers
-
+import Cronrouter from "./testRouter";
 
 // Initialize Express app
 const app = express();
@@ -27,7 +27,7 @@ app.use(express.json());
 app.get("/debug-sentry",  function mainHandler(req, res){
   res.send ("My first Sentry error")
  } );
-
+app.get("/test-cron-job",Cronrouter)
 Sentry.setupExpressErrorHandler(app);
 
 // Apollo Server setup
