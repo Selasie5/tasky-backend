@@ -4,24 +4,21 @@ import {logger} from "../utils/logger"
 export const taskService ={
 
     //Create a task
-    createTask: async(input: {title:string, description:string, status:string,deadline:Date})=>
+    createTask: async(input: {title:string, description:string, status:string,deadline: Date | string})=>
     {
         try {
             const task = new Task (input);
-            if(!input.deadline)
-            {
-              input.deadline = new Date(Date.now()+ 24*60*60*10000);
-            }
+            
             await task.save();
-    
+
+            
+          
             //Sending task to message queue
             try {
               await sendTaskToQueue(task);
             } catch (error) {
               console.log(error)
             }
-             
-
             return task;
         } catch (error:any) {
           console.log(error)
