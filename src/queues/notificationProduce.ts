@@ -1,12 +1,13 @@
 import amqp from "amqplib";
 import { logger } from "../utils/logger";
+import { env } from "../config/environment";
 
 export const sendNotificationToQueue =async (notification:any)=>
 {
     const QUEUE = "notification_queue";
-
+    const QUEUE_URI = env.RABBITMQ_URL || "amqp://localhost:5672";
     try {
-        const connection  = await amqp.connect("amqp://localhost:5672");
+        const connection = await amqp.connect(QUEUE_URI);
         
         const channel = await connection.createChannel();
         await channel.assertQueue(QUEUE, {durable:true});
