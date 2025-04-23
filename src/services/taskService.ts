@@ -8,6 +8,10 @@ export const taskService ={
     {
         try {
             const task = new Task (input);
+            if(!input.deadline)
+            {
+              input.deadline = new Date(Date.now()+ 24*60*60*10000);
+            }
             await task.save();
     
             //Sending task to message queue
